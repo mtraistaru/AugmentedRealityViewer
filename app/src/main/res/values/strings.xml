@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Application.Name">Augmented Reality Viewer</string>
+    <string name="Application.Description">Augmented Reality Viewer allows you to view wavefront obj models on an Augmented Reality marker.</string>
+    <string name="Rotate">Rotate</string>
+    <string name="Translate">Translate</string>
+    <string name="Scale">Scale</string>
+    <string name="Screenshot.Take">Take screenshot</string>
+    <string name="Screenshot.Saved">Screenshot saved!</string>
+    <string name="Screenshot.Failed">Failed to save screenshot: </string>
+    <string name="Progress.Dialog.Next">Loading. Please wait…</string>
+</resources>

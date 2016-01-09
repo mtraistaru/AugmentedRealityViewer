@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ancestor.AugmentedRealityViewer">
+
+    <application
+        android:description="@string/Application.Description"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/Application.Name">
+
+        <activity
+            android:name=".activity.Model3DViewerActivity"
+            android:clearTaskOnLaunch="true"
+            android:icon="@mipmap/ic_launcher"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.Model3DSelectionActivity"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/Application.Name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+</manifest>
