@@ -10,14 +10,14 @@ import javax.microedition.khronos.opengles.GL10;
 
 import edu.dhbw.andar.ARObject;
 
-public class CustomARObject extends ARObject implements Serializable {
+public class MarkerARObject extends ARObject implements Serializable {
 
     private Model model;
     private Group[] texturedGroups;
     private Group[] nonTexturedGroups;
     private HashMap<Material, Integer> textureIDs = new HashMap<>();
 
-    public CustomARObject(Model model) {
+    public MarkerARObject(Model model) {
         super("model", "barcode.patt", 80.0, new double[]{0, 0});
         this.model = model;
         model.finalize();

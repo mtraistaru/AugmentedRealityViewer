@@ -16,8 +16,8 @@ import android.view.View.OnTouchListener;
 import android.widget.Toast;
 
 import com.ancestor.AugmentedRealityViewer.R;
-import com.ancestor.AugmentedRealityViewer.domain.CustomARObject;
 import com.ancestor.AugmentedRealityViewer.domain.CustomLightRenderer;
+import com.ancestor.AugmentedRealityViewer.domain.MarkerARObject;
 import com.ancestor.AugmentedRealityViewer.domain.Model;
 import com.ancestor.AugmentedRealityViewer.util.AssetsUtils;
 import com.ancestor.AugmentedRealityViewer.util.FileUtils;
@@ -54,7 +54,7 @@ public class Model3DViewerActivity extends AndARActivity implements SurfaceHolde
     ARToolkit augmentedRealityToolkit;
     private int mode = SCALE;
     private Model model;
-    private CustomARObject customARObject;
+    private MarkerARObject markerARObject;
     private ProgressDialog progressDialog;
     private Resources res;
 
@@ -68,13 +68,6 @@ public class Model3DViewerActivity extends AndARActivity implements SurfaceHolde
         super.setNonARRenderer(new CustomLightRenderer());
         res = getResources();
         augmentedRealityToolkit = getArtoolkit();
-        getSurfaceView().setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                openContextMenu(getSurfaceView());
-                return false;
-            }
-        });
         getSurfaceView().setOnTouchListener(new OnTouchListener() {
 
             private float previousX = 0;
@@ -197,8 +190,8 @@ public class Model3DViewerActivity extends AndARActivity implements SurfaceHolde
                 try {
                     if (type == TYPE_EXTERNAL) {
                         BufferedReader modelFileReader = new BufferedReader(new FileReader(file));
-                        String shebang = modelFileReader.readLine();
-                        if (!shebang.equals("#trimmed")) {
+                        String currentLine = modelFileReader.readLine();
+                        if (!currentLine.equals("#trimmed")) {
                             File trimmedFile = new File(file.getAbsolutePath() + ".tmp");
                             BufferedWriter trimmedFileWriter = new BufferedWriter(new FileWriter(trimmedFile));
                             StringUtils.trim(modelFileReader, trimmedFileWriter);
@@ -211,7 +204,7 @@ public class Model3DViewerActivity extends AndARActivity implements SurfaceHolde
                         BufferedReader fileReader = fileUtils.getReaderFromName(modelFileName);
                         if (fileReader != null) {
                             model = parser.parseModel("Model", fileReader);
-                            customARObject = new CustomARObject(model);
+                            markerARObject = new MarkerARObject(model);
                         }
                     }
                 } catch (IOException | ParseException e) {
@@ -227,8 +220,8 @@ public class Model3DViewerActivity extends AndARActivity implements SurfaceHolde
             progressDialog.dismiss();
 
             try {
-                if (customARObject != null)
-                    augmentedRealityToolkit.registerARObject(customARObject);
+                if (markerARObject != null)
+                    augmentedRealityToolkit.registerARObject(markerARObject);
             } catch (AndARException e) {
                 e.printStackTrace();
             }
